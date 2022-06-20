@@ -92,13 +92,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNNINGS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLAD.lib;STBI.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"</Command>
@@ -112,15 +112,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLAD.lib;STBI.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"</Command>
@@ -132,13 +132,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNNINGS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLAD.lib;STBI.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"</Command>
@@ -152,15 +152,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNNINGS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLAD.lib;STBI.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"</Command>
