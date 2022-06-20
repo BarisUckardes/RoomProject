@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <Engine/Window/Window.h>
+#include <Engine/Application/Application.h>
 
 int main(int argumentCount, const char** arguments)
 {
@@ -10,12 +11,7 @@ int main(int argumentCount, const char** arguments)
 	windowCreateDesc.Height = 512;
 	windowCreateDesc.Title = "Room/Project/1";
 
-	Engine::Window* window = new Engine::Window(windowCreateDesc);
-	window->show_window();
+	Engine::Application application = Engine::Application(windowCreateDesc);
 
-	while (!window->has_close_request())
-	{
-		window->update_messages();
-		window->swap_buffers();
-	}
+	application.run();
 }
