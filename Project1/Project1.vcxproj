@@ -155,12 +155,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\FirstPersonCameraComponent.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="Modules\StartupModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
       <Project>{a30f76f9-31e9-4b12-a287-3abfc9c9f9f4}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Components\FirstPersonCameraComponent.h" />
+    <ClInclude Include="Modules\StartupModule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

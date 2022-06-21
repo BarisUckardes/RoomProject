@@ -33,7 +33,7 @@ namespace Engine
 		/*
 		* Set shader source data
 		*/
-		const GLchar* charSrc = *Source;
+		const char* charSrc = source.get_source();
 		glShaderSource(ShaderHandle, 1, &charSrc, 0);
 
 		/*

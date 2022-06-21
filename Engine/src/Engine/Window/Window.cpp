@@ -18,9 +18,22 @@ typedef int (WINAPI* PFNWGLGETSWAPINTERVALEXTPROC) (void);
 
 namespace Engine
 {
+	float Window::s_Width = 0;
+	float Window::s_Height = 0;
+
 	bool Window::has_close_request() const
 	{
 		return CloseRequest;
+	}
+
+	unsigned int Window::get_width() const
+	{
+		return Width;
+	}
+
+	unsigned int Window::get_height() const
+	{
+		return Height;
 	}
 
 	void Window::update_messages()
@@ -39,6 +52,16 @@ namespace Engine
 	void Window::show_window(const bool state)
 	{
 		ShowWindow(WindowHandle,state == true ? SW_SHOW : SW_HIDE);
+	}
+
+	float Window::get_window_width()
+	{
+		return s_Width;
+	}
+
+	float Window::get_window_height()
+	{
+		return s_Height;
 	}
 
 	Window::Window(const WindowCreateDesc& desc,Application* listenerApplication)
@@ -256,6 +279,8 @@ namespace Engine
 
 				 Width = eventData->get_width();
 				 Height = eventData->get_height();
+				 s_Width = Width;
+				 s_Height = Height;
 				 break;
 			 }
 			 case Engine::WindowEventType::WindowMoved:

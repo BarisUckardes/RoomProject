@@ -1,6 +1,7 @@
 #include "Mesh.h"
 #include <GLAD/glad.h>
 #include <Engine/Graphics/Mesh/MeshVertexElementUtils.h>
+#include <Engine/Message/Message.h>
 
 namespace Engine
 {
@@ -32,6 +33,7 @@ namespace Engine
 			glVertexAttribPointer(i, MeshVertexElementUtils::get_component_size(element.Type), GL_FLOAT, element.Normalized, stride, (const void*)(offset));
 
 			offset += MeshVertexElementUtils::get_data_size(element.Type);
+			
 		}
 
 	

@@ -15,6 +15,9 @@ namespace Engine
 		Application(const WindowCreateDesc& desc);
 		~Application() = default;
 
+		template<typename TModule,typename... TParameters>
+		void create_module(TParameters... parameters);
+
 		void run();
 		void dispatch_event(WindowEvent* event);
 	private:
@@ -24,4 +27,11 @@ namespace Engine
 		WindowEvent* PerFrameEventBuffer[PER_FRAME_MAX_EVENT_COUNT];
 		unsigned int PerFrameEventBufferCursor;
 	};
+	template<typename TModule, typename ...TParameters>
+	inline void Application::create_module(TParameters ...parameters)
+	{
+		TModule* module = new TModule(parameters...);
+
+		Modules.add(module);
+	}
 }

@@ -24,15 +24,22 @@ namespace Engine
 	class ENGINE_API Window
 	{
 	public:
+		FORCEINLINE static float get_window_width();
+		FORCEINLINE static float get_window_height();
+
 		Window(const WindowCreateDesc& desc,Application* listenerApplication);
 		~Window();
 
 		FORCEINLINE bool has_close_request() const;
+		FORCEINLINE unsigned int get_width() const;
+		FORCEINLINE unsigned int get_height() const;
 
 		void update_messages();
 		void swap_buffers();
 		void show_window(const bool state = true);
 	private:
+		static float s_Width;
+		static float s_Height;
 		static LRESULT CALLBACK Win32WindowMessageProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 		FORCEINLINE void _broadcast_event(WindowEvent* event);

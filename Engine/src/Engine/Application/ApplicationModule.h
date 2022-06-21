@@ -27,6 +27,11 @@ namespace Engine
 		FORCEINLINE virtual void tick() = 0;
 
 		/// <summary>
+		/// Called after the tick routine
+		/// </summary>
+		FORCEINLINE virtual void post_tick() = 0;
+
+		/// <summary>
 		/// Called upon shut-down
 		/// </summary>
 		FORCEINLINE virtual void finalize() = 0;

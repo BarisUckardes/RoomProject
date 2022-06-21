@@ -56,6 +56,6 @@ namespace Engine
 	}
 	unsigned int ShaderProgram::get_program_handle() const
 	{
-		return 0;
+		return ProgramHandle;
 	}
 }

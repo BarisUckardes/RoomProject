@@ -9,11 +9,11 @@ namespace Engine
 	}
 	unsigned int WindowResizedEvent::get_width() const
 	{
-		return 0;
+		return Width;
 	}
 	unsigned int WindowResizedEvent::get_height() const
 	{
-		return 0;
+		return Height;
 	}
 	WindowEventType WindowResizedEvent::get_event_type() const
 	{

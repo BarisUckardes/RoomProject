@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <Engine/Window/Window.h>
 #include <Engine/Application/Application.h>
+#include "../Modules/StartupModule.h"
 
 int main(int argumentCount, const char** arguments)
 {
@@ -12,6 +13,7 @@ int main(int argumentCount, const char** arguments)
 	windowCreateDesc.Title = "Room/Project/1";
 
 	Engine::Application application = Engine::Application(windowCreateDesc);
+	application.create_module<StartupModule>();
 
 	application.run();
 }

@@ -27,26 +27,26 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -90,15 +90,16 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNNINGS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNNINGS;_CRT_SECURE_NO_WARNINGS;RUN_PROJECT_1</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"</Command>
@@ -110,9 +111,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;RUN_PROJECT_1</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -120,7 +122,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"</Command>
@@ -130,15 +132,16 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNNINGS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNNINGS;_CRT_SECURE_NO_WARNINGS;RUN_PROJECT_1</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"</Command>
@@ -150,9 +153,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNNINGS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNNINGS;_CRT_SECURE_NO_WARNINGS;RUN_PROJECT_1</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -160,13 +164,31 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ForwardRenderer\ForwardSpotLight.h" />
+    <ClInclude Include="src\Project1\Components\OrbitComponent.h" />
+    <ClInclude Include="src\ForwardRenderer\ForwardPointLight.h" />
+    <ClInclude Include="src\Engine\Time\GameTime.h" />
+    <ClInclude Include="src\Engine\Application\Modules\GameInputModule.h" />
+    <ClInclude Include="src\Engine\Input\GameInputBlob.h" />
+    <ClInclude Include="src\Engine\Input\GameInput.h" />
+    <ClInclude Include="src\Engine\Graphics\Material\Material.h" />
+    <ClInclude Include="src\Engine\Path\PathUtils.h" />
+    <ClInclude Include="src\ForwardRenderer\ForwardRenderable.h" />
+    <ClInclude Include="src\ForwardRenderer\MeshVertex.h" />
+    <ClInclude Include="src\ForwardRenderer\ObserverComponent.h" />
+    <ClInclude Include="src\ForwardRenderer\SpatialComponent.h" />
+    <ClInclude Include="src\ForwardRenderer\ForwardRendererFunction.h" />
+    <ClInclude Include="src\IterativeLogic\IterativeLogicFunction.h" />
+    <ClInclude Include="src\IterativeLogic\LogicComponent.h" />
+    <ClInclude Include="src\Engine\World\Entity.h" />
+    <ClInclude Include="src\Engine\World\Component.h" />
     <ClInclude Include="src\Engine\Graphics\Shader\ShaderProgram.h" />
     <ClInclude Include="src\Engine\Graphics\Shader\ShaderUtils.h" />
     <ClInclude Include="src\Engine\Graphics\Shader\Shader.h" />
@@ -203,8 +225,31 @@
     <ClInclude Include="src\Engine\Window\Mouse\WindowMouseButtonEvent.h" />
     <ClInclude Include="src\Engine\Graphics\Texture\Texture2D.h" />
     <ClInclude Include="src\Engine\Graphics\Texture\TextureLoader.h" />
+    <ClInclude Include="src\Engine\World\World.h" />
+    <ClInclude Include="src\Engine\World\WorldFunction.h" />
+    <ClInclude Include="src\Engine\Application\Modules\WorldFunctionExecutorModule.h" />
+    <ClInclude Include="src\Project1\Components\FirstPersonCameraComponent.h" />
+    <ClInclude Include="src\Project1\StartupModule1.h" />
+    <ClInclude Include="src\Resources\Meshes.h" />
+    <ClInclude Include="src\Resources\Shaders.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ForwardRenderer\ForwardSpotLight.cpp" />
+    <ClCompile Include="src\Project1\Components\OrbitComponent.cpp" />
+    <ClCompile Include="src\ForwardRenderer\ForwardPointLight.cpp" />
+    <ClCompile Include="src\Engine\Time\GameTime.cpp" />
+    <ClCompile Include="src\Engine\Application\Modules\GameInputModule.cpp" />
+    <ClCompile Include="src\Engine\Input\GameInput.cpp" />
+    <ClCompile Include="src\Engine\Graphics\Material\Material.cpp" />
+    <ClCompile Include="src\Engine\Path\PathUtils.cpp" />
+    <ClCompile Include="src\ForwardRenderer\ForwardRenderable.cpp" />
+    <ClCompile Include="src\ForwardRenderer\ObserverComponent.cpp" />
+    <ClCompile Include="src\ForwardRenderer\SpatialComponent.cpp" />
+    <ClCompile Include="src\ForwardRenderer\ForwardRendererFunction.cpp" />
+    <ClCompile Include="src\IterativeLogic\IterativeLogicFunction.cpp" />
+    <ClCompile Include="src\IterativeLogic\LogicComponent.cpp" />
+    <ClCompile Include="src\Engine\World\Entity.cpp" />
+    <ClCompile Include="src\Engine\World\Component.cpp" />
     <ClCompile Include="src\Engine\Graphics\Shader\ShaderProgram.cpp" />
     <ClCompile Include="src\Engine\Graphics\Shader\ShaderUtils.cpp" />
     <ClCompile Include="src\Engine\Graphics\Shader\Shader.cpp" />
@@ -229,6 +274,12 @@
     <ClCompile Include="src\Engine\Window\Mouse\WindowMouseButtonEvent.cpp" />
     <ClCompile Include="src\Engine\Graphics\Texture\Texture2D.cpp" />
     <ClCompile Include="src\Engine\Graphics\Texture\TextureLoader.cpp" />
+    <ClCompile Include="src\Engine\World\World.cpp" />
+    <ClCompile Include="src\Engine\World\WorldFunction.cpp" />
+    <ClCompile Include="src\Engine\Application\Modules\WorldFunctionExecutorModule.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Project1\Components\FirstPersonCameraComponent.cpp" />
+    <ClCompile Include="src\Project1\StartupModule1.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
