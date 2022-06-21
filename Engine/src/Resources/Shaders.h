@@ -33,6 +33,30 @@ void main()
 }
 )glsl";
 
+Engine::String g_UIVertexShader = R"glsl(
+#version 450 core
+layout(location = 0) in vec2 aPosition;
+
+uniform mat4 v_Ortho;
+uniform vec2 v_Position;
+void main()
+{
+	gl_Position = v_Ortho*vec4(aPosition + v_Position,0.0f,1.0f);
+}
+)glsl";
+
+Engine::String g_UIFragmentShader = R"glsl(
+#version 450 core
+
+out vec4 f_ColorOut;
+
+uniform vec3 f_Color;
+void main()
+{
+	f_ColorOut = vec4(f_Color,1.0f);
+}
+)glsl";
+
 Engine::String g_LitTextureVertexShader = R"glsl(
 #version 450 core
 layout(location = 0) in vec3 aPosition;

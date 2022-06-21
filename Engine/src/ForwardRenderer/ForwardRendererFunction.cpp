@@ -50,10 +50,12 @@ namespace Engine
     }
     void ForwardRendererFunction::initialize()
     {
-        glEnable(GL_DEPTH_TEST);
+        
     }
     void ForwardRendererFunction::execute()
     {
+        glEnable(GL_DEPTH_TEST);
+
         /*
         * Set and clear the swapchain framebuffer upfront
         */
@@ -134,14 +136,20 @@ namespace Engine
             Array<glm::vec3> pointLightPositions;
             Array<glm::vec3> pointLightColors;
             Array<float> pointLightRanges;
+            unsigned int activePointLightCount = 0;
             for (unsigned int p = 0; p < PointLights.get_cursor(); p++)
             {
                 const ForwardPointLight* pointLight = PointLights[p];
+
+                if (!pointLight->is_active())
+                    continue;
+
                 pointLightRanges.add(pointLight->get_range());
                 pointLightPositions.add(pointLight->get_owner_entity()->get_component<SpatialComponent>()->get_position());
                 pointLightColors.add(pointLight->get_color());
+                activePointLightCount++;
             }
-            glUniform1i(glGetUniformLocation(programHandle, "f_PointLightCount"), PointLights.get_cursor());
+            glUniform1i(glGetUniformLocation(programHandle, "f_PointLightCount"), activePointLightCount);
             glUniform1fv(glGetUniformLocation(programHandle, "f_PointLightRanges"), pointLightRanges.get_cursor(), pointLightRanges.get_data());
             glUniform3fv(glGetUniformLocation(programHandle, "f_PointLightPositions"), pointLightPositions.get_cursor(), &pointLightPositions.get_data()->x);
             glUniform3fv(glGetUniformLocation(programHandle, "f_PointLightColors"), pointLightColors.get_cursor(), &pointLightColors.get_data()->x);
@@ -154,17 +162,23 @@ namespace Engine
             Array<glm::vec3> spotLightDirs;
             Array<float> spotLightRanges;
             Array<float> spotLightAngles;
+            unsigned int activeSpotLightCount = 0;
             for (unsigned int p = 0; p < SpotLights.get_cursor(); p++)
             {
                 const ForwardSpotLight* spotLight = SpotLights[p];
+
+                if (!spotLight->is_active())
+                    continue;
+
                 const SpatialComponent* spatial = spotLight->get_owner_entity()->get_component<SpatialComponent>();
                 spotLightRanges.add(spotLight->get_range());
                 spotLightAngles.add(spotLight->get_radius());
                 spotLightPositions.add(spatial->get_position());
                 spotLightDirs.add(spatial->get_forward_vector());
                 spotLightColors.add(spotLight->get_color());
+                activeSpotLightCount++;
             }
-            glUniform1i(glGetUniformLocation(programHandle, "f_SpotLightCount"), SpotLights.get_cursor());
+            glUniform1i(glGetUniformLocation(programHandle, "f_SpotLightCount"),activeSpotLightCount);
             glUniform1fv(glGetUniformLocation(programHandle, "f_SpotLightRanges"), spotLightRanges.get_cursor(), spotLightRanges.get_data());
             glUniform1fv(glGetUniformLocation(programHandle, "f_SpotLightAngles"), spotLightAngles.get_cursor(), spotLightAngles.get_data());
             glUniform3fv(glGetUniformLocation(programHandle, "f_SpotLightPositions"), spotLightPositions.get_cursor(), &spotLightPositions.get_data()->x);

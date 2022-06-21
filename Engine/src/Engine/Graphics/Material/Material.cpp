@@ -14,6 +14,10 @@ namespace Engine
     {
         return Floats;
     }
+    const Array<MaterialParameter<glm::vec3>>& Material::get_vec3_parameters() const
+    {
+        return Vector3s;
+    }
     ShaderProgram* Material::get_program() const
     {
         return Program;
@@ -70,6 +74,34 @@ namespace Engine
         else
         {
             Floats[parameterIndex].Parameter = parameter;
+        }
+    }
+    void Material::set_vec3_parameter(const String& parameterName, const glm::vec3& parameter)
+    {
+
+        /*
+         * Validate if this is anew parameter
+        */
+        int parameterIndex = -1;
+        for (unsigned int i = 0; i < Vector3s.get_cursor(); i++)
+        {
+            if (Vector3s[i].Name == parameterName)
+            {
+                parameterIndex = i;
+                break;
+            }
+        }
+
+        if (parameterIndex == -1) // parameter does not exists
+        {
+            MaterialParameter<glm::vec3> vec3Parameter = {};
+            vec3Parameter.Name = parameterName;
+            vec3Parameter.Parameter = parameter;
+            Vector3s.add(vec3Parameter);
+        }
+        else
+        {
+            Vector3s[parameterIndex].Parameter = parameter;
         }
     }
     int Material::get_paramater_index(const String& name)

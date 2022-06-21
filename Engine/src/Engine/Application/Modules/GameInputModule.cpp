@@ -32,6 +32,7 @@ namespace Engine
                 WindowKeyEvent* eventData = (WindowKeyEvent*)event;
                 const unsigned int key = eventData->get_related_key();
 
+                
                 Blob->Keys[key] = 1;
                 break;
             }
@@ -47,7 +48,6 @@ namespace Engine
             {
                 WindowMouseButtonEvent* eventData = (WindowMouseButtonEvent*)event;
                 const unsigned int button = eventData->get_related_button();
-
                 Blob->Buttons[button] = 1;
                 break;
             }
@@ -86,5 +86,15 @@ namespace Engine
     {
         Blob->MouseDeltaX = 0;
         Blob->MouseDeltaY = 0;
+        for (unsigned int i = 0; i < BUTTON_COUNT; i++)
+        {
+            if (Blob->Buttons[i] == 1)
+                Blob->Buttons[i] = 2;
+        }
+        for (unsigned int i = 0; i < KEY_COUNT; i++)
+        {
+            if (Blob->Keys[i] == 1)
+                Blob->Keys[i] = 2;
+        }
     }
 }

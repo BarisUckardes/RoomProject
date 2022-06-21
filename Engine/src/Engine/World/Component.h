@@ -8,12 +8,14 @@ namespace Engine
 	{
 		friend class Entity;
 	public:
-		Component() : OwnerEntity(nullptr),Name("Default Component Name") {}
+		Component() : OwnerEntity(nullptr),Name("Default Component Name"),Active(true) {}
 		~Component() = default;
 
 		FORCEINLINE Entity* get_owner_entity() const;
 		FORCEINLINE String get_name() const;
+		FORCEINLINE bool is_active() const;
 
+		FORCEINLINE void set_active(const bool state);
 		FORCEINLINE void set_name(const String& name);
 
 		FORCEINLINE virtual String get_class_name() const = 0;
@@ -24,6 +26,7 @@ namespace Engine
 	private:
 		Entity* OwnerEntity;
 		String Name;
+		bool Active;
 	};
 #define GENERATE_COMPONENT(name) public: FORCEINLINE static Engine::String get_static_class_name() { return #name;} virtual Engine::String get_class_name() const override { return #name;}
 }

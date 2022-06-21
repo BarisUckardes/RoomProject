@@ -21,10 +21,11 @@
 #include <ForwardRenderer/ForwardPointLight.h>
 #include <Project1/Components/OrbitComponent.h>
 #include <ForwardRenderer/ForwardSpotLight.h>
+#include <GUI/UISwitchButton.h>
+#include <GUI/GUIResolverFunction.h>
 
 #define CAMERA_MOVEMENT_SPEED 10.0f
 #define CAMERA_ANGULAR_SPEED 5.0f
-
 
 namespace Engine
 {
@@ -34,9 +35,13 @@ namespace Engine
 		/*
 		* Load resource
 		*/
-		Shader* unlitTextureVertexShader = new Shader(g_LitTextureVertexShader,ShaderStage::Vertex);
-		Shader* unlitTextureFragmentShader = new Shader(g_LitTextureFragmentShader,ShaderStage::Fragment);
-		ShaderProgram* unlitTextureProgram = new ShaderProgram({ unlitTextureVertexShader,unlitTextureFragmentShader });
+		Shader* litTextureVertexShader = new Shader(g_LitTextureVertexShader,ShaderStage::Vertex);
+		Shader* litTextureFragmentShader = new Shader(g_LitTextureFragmentShader,ShaderStage::Fragment);
+		ShaderProgram* litTextureProgram = new ShaderProgram({ litTextureVertexShader,litTextureFragmentShader });
+
+		Shader* uiVertexShader = new Shader(g_UIVertexShader, ShaderStage::Vertex);
+		Shader* uiFragmentShader = new Shader(g_UIFragmentShader, ShaderStage::Fragment);
+		ShaderProgram* uiProgram = new ShaderProgram({ uiVertexShader,uiFragmentShader });
 
 		Array<MeshVertexElementDesc> meshVertexElements;
 		meshVertexElements.add(MeshVertexElementDesc("Position", MeshVertexElementType::Float3, false));
@@ -56,21 +61,37 @@ namespace Engine
 		mesh->update_vertex_data(planeVertexes.get_data());
 		mesh->update_index_data(planeIndexes.get_data());
 
+		Array<MeshVertexElementDesc> uiMeshVertexElements;
+		uiMeshVertexElements.add(MeshVertexElementDesc("Position", MeshVertexElementType::Float2, false));
+
+		Mesh* uiRectMesh = new Mesh(uiMeshVertexElements);
+		
+		Array<UIVertex> uiVertexes = get_ui_rect_vertexes();
+		Array<unsigned int> uiIndexes = get_ui_rect_indexes();
+		uiRectMesh->allocate_vertex_data(sizeof(UIVertex) * uiVertexes.get_cursor());
+		uiRectMesh->allocate_index_data(sizeof(unsigned int) * uiIndexes.get_cursor(), uiIndexes.get_cursor());
+
+		uiRectMesh->update_vertex_data(uiVertexes.get_data());
+		uiRectMesh->update_index_data(uiIndexes.get_data());
+
 		Texture2D* floorTexture0 = new Texture2D(PathUtils::get_relative_path("\\floor0_color.jpg"));
 		Texture2D* wallTexture0 = new Texture2D(PathUtils::get_relative_path("\\wall0_color.jpg"));
 		Texture2D* roofTexture0 = new Texture2D(PathUtils::get_relative_path("\\roof0_color.jpg"));
 
-		Material* floorMaterial = new Material(unlitTextureProgram);
+		Material* floorMaterial = new Material(litTextureProgram);
 		floorMaterial->set_texture_parameter("f_Texture", floorTexture0);
 		floorMaterial->set_float_parameter("f_Tiling", 15.0f);
 
-		Material* wallMaterial = new Material(unlitTextureProgram);
+		Material* wallMaterial = new Material(litTextureProgram);
 		wallMaterial->set_texture_parameter("f_Texture", wallTexture0);
 		wallMaterial->set_float_parameter("f_Tiling", 3.0f);
 
-		Material* roofMaterial = new Material(unlitTextureProgram);
+		Material* roofMaterial = new Material(litTextureProgram);
 		roofMaterial->set_texture_parameter("f_Texture", roofTexture0);
 		roofMaterial->set_float_parameter("f_Tiling", 3.0f);
+
+		Material* uiMaterial = new Material(uiProgram);
+		uiMaterial->set_vec3_parameter("f_Color", {1.0f,0.0f,0.0f});
 
 		/*
 		* Create world and functions
@@ -78,6 +99,7 @@ namespace Engine
 		gameWorld = get_owner_session()->create_world("Project1 World");
 		gameWorld->create_function<IterativeLogicFunction>();
 		gameWorld->create_function<ForwardRendererFunction>();
+		gameWorld->create_function<GUIResolverFunction>();
 
 		/*
 		* Create floor
@@ -156,7 +178,6 @@ namespace Engine
 		ForwardPointLight* pointLight0 = pointLightEntity0->create_component<ForwardPointLight>();
 		pointLight0->set_range(35);
 		pointLight0->set_color({ 0.94f,0.82f,0.88f });
-		
 		pointLightEntity0->create_component<OrbitComponent>();
 
 		Entity* pointLightEntity1 = gameWorld->create_entity("Point light 0");
@@ -218,6 +239,46 @@ namespace Engine
 		ObserverComponent* cameraObserverComponent = cameraEntity->create_component<ObserverComponent>();
 
 		FirstPersonCameraComponent* cameraFPSControllerComponent = cameraEntity->create_component<FirstPersonCameraComponent>();
+
+		/*
+		* Create ui
+		*/
+		Entity* uiRectEntity0 = gameWorld->create_entity("Ui rect 0");
+		SpatialComponent* uiRectSpatial = uiRectEntity0->create_component<SpatialComponent>();
+		uiRectSpatial->set_position({0.0f,0.95f,0.0f});
+
+		UISwitchButton* uiRectButton0 = uiRectEntity0->create_component<UISwitchButton>(pointLight0);
+		uiRectButton0->set_color({ 0.0f,0.0f,1.0f });
+		uiRectButton0->set_material(uiMaterial);
+		uiRectButton0->set_mesh(uiRectMesh);
+
+		Entity* uiRectEntity1 = gameWorld->create_entity("Ui rect 0");
+		SpatialComponent* uiRectSpatial1 = uiRectEntity1->create_component<SpatialComponent>();
+		uiRectSpatial1->set_position({ 0.25f,0.95f,0.0f });
+
+		UISwitchButton* uiRectButton1 = uiRectEntity1->create_component<UISwitchButton>(spotLight0);
+		uiRectButton1->set_color({ 0.2f,0.3f,0.4f });
+		uiRectButton1->set_material(uiMaterial);
+		uiRectButton1->set_mesh(uiRectMesh);
+
+
+		Entity* uiRectEntity2 = gameWorld->create_entity("Ui rect 0");
+		SpatialComponent* uiRectSpatial2 = uiRectEntity2->create_component<SpatialComponent>();
+		uiRectSpatial2->set_position({ 0.5f,0.95f,0.0f });
+
+		UISwitchButton* uiRectButton2 = uiRectEntity2->create_component<UISwitchButton>(spotLight1);
+		uiRectButton2->set_color({ 0.4f,0.1f,0.7f });
+		uiRectButton2->set_material(uiMaterial);
+		uiRectButton2->set_mesh(uiRectMesh);
+
+		Entity* uiRectEntity3 = gameWorld->create_entity("Ui rect 0");
+		SpatialComponent* uiRectSpatial3 = uiRectEntity3->create_component<SpatialComponent>();
+		uiRectSpatial3->set_position({ 0.75f,0.95f,0.0f });
+
+		UISwitchButton* uiRectButton3 = uiRectEntity3->create_component<UISwitchButton>(spotLight2);
+		uiRectButton3->set_color({ 0.2f,0.4f,0.6f });
+		uiRectButton3->set_material(uiMaterial);
+		uiRectButton3->set_mesh(uiRectMesh);
 
 		MESSAGE("StartupModule", "Startup module initialized");
 	}

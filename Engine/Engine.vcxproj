@@ -171,7 +171,10 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\GUI\GUIResolverFunction.h" />
+    <ClInclude Include="src\Engine\Application\Modules\GUIModule.h" />
     <ClInclude Include="src\ForwardRenderer\ForwardSpotLight.h" />
+    <ClInclude Include="src\GUI\UIVertex.h" />
     <ClInclude Include="src\Project1\Components\OrbitComponent.h" />
     <ClInclude Include="src\ForwardRenderer\ForwardPointLight.h" />
     <ClInclude Include="src\Engine\Time\GameTime.h" />
@@ -232,8 +235,12 @@
     <ClInclude Include="src\Project1\StartupModule1.h" />
     <ClInclude Include="src\Resources\Meshes.h" />
     <ClInclude Include="src\Resources\Shaders.h" />
+    <ClInclude Include="src\GUI\UIRectButton.h" />
+    <ClInclude Include="src\GUI\UISwitchButton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\GUI\GUIResolverFunction.cpp" />
+    <ClCompile Include="src\Engine\Application\Modules\GUIModule.cpp" />
     <ClCompile Include="src\ForwardRenderer\ForwardSpotLight.cpp" />
     <ClCompile Include="src\Project1\Components\OrbitComponent.cpp" />
     <ClCompile Include="src\ForwardRenderer\ForwardPointLight.cpp" />
@@ -280,6 +287,8 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Project1\Components\FirstPersonCameraComponent.cpp" />
     <ClCompile Include="src\Project1\StartupModule1.cpp" />
+    <ClCompile Include="src\GUI\UIRectButton.cpp" />
+    <ClCompile Include="src\GUI\UISwitchButton.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
