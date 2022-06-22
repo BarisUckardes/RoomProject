@@ -14,7 +14,6 @@ namespace Engine
 	private:
 		float MovementSpeed;
 		float AngularSpeed;
-
 	};
 
 

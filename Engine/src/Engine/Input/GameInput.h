@@ -16,6 +16,7 @@ namespace Engine
 		FORCEINLINE static float get_mouse_delta_x();
 		FORCEINLINE static float get_mouse_delta_y();
 		FORCEINLINE static bool is_key_down(const unsigned int key);
+		FORCEINLINE static bool is_key_pressed(const unsigned int key);
 		FORCEINLINE static bool is_button_pressed(const unsigned int key);
 		FORCEINLINE static bool is_key_up(const unsigned int key);
 		FORCEINLINE static bool is_button_down(const unsigned int button);

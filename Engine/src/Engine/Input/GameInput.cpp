@@ -28,6 +28,11 @@ namespace Engine
 	{
 		return InputBlob->Keys[key] >= 1; // 1 and 2 is the down state
 	}
+
+	bool GameInput::is_key_pressed(const unsigned int key)
+	{
+		return InputBlob->Keys[key] == 1;
+	}
 	
 	bool GameInput::is_key_up(const unsigned int key)
 	{
@@ -35,7 +40,6 @@ namespace Engine
 	}
 	bool GameInput::is_button_pressed(const unsigned int key)
 	{
-		MESSAGE("GameInput", "Button was %d", InputBlob->Buttons[key]);
 		return InputBlob->Buttons[key] == 1;
 	}
 	bool GameInput::is_button_down(const unsigned int button)

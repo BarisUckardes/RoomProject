@@ -92,17 +92,18 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNNINGS;_CRT_SECURE_NO_WARNINGS;RUN_PROJECT_1</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include;$(SolutionDir)ThirdParty\ASSIMP\include\</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;$(SolutionDir)ThirdParty\ASSIMP\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;shlwapi.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"</Command>
+      <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"
+xcopy /y "$(SolutionDir)ThirdParty\ASSIMP\bin\assimp-vc143-mtd.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Engine\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -113,7 +114,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;RUN_PROJECT_1</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include;$(SolutionDir)ThirdParty\ASSIMP\include\</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -121,11 +122,12 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;$(SolutionDir)ThirdParty\ASSIMP\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;shlwapi.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"</Command>
+      <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"
+xcopy /y "$(SolutionDir)ThirdParty\ASSIMP\bin\assimp-vc143-mtd.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Engine\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -134,17 +136,18 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNNINGS;_CRT_SECURE_NO_WARNINGS;RUN_PROJECT_1</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include;$(SolutionDir)ThirdParty\ASSIMP\include\</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;$(SolutionDir)ThirdParty\ASSIMP\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;shlwapi.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"</Command>
+      <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"
+xcopy /y "$(SolutionDir)ThirdParty\ASSIMP\bin\assimp-vc143-mtd.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Engine\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,7 +158,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);ENGINE_BUILD;_CRT_SECURE_NO_WARNNINGS;_CRT_SECURE_NO_WARNINGS;RUN_PROJECT_1</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)ThirdParty\GLAD\include;$(SolutionDir)ThirdParty\STBI\include;$(SolutionDir)ThirdParty\GLM\include;$(SolutionDir)ThirdParty\ASSIMP\include\</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -163,14 +166,17 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLAD\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\STBI\;$(SolutionDir)binaries\$(Platform)-$(Configuration)\GLM\;$(SolutionDir)ThirdParty\ASSIMP\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>GLAD.lib;STBI.lib;GLM.lib;opengl32.lib;shlwapi.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"</Command>
+      <Command>xcopy /y "$(OutDir)Engine.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Project1\"
+xcopy /y "$(SolutionDir)ThirdParty\ASSIMP\bin\assimp-vc143-mtd.dll" "$(SolutionDir)binaries\$(Platform)-$(Configuration)\Engine\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\Graphics\Mesh\MeshLoader.h" />
+    <ClInclude Include="src\Project1\Components\RGBLightControl.h" />
     <ClInclude Include="src\GUI\GUIResolverFunction.h" />
     <ClInclude Include="src\Engine\Application\Modules\GUIModule.h" />
     <ClInclude Include="src\ForwardRenderer\ForwardSpotLight.h" />
@@ -239,6 +245,8 @@
     <ClInclude Include="src\GUI\UISwitchButton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Graphics\Mesh\MeshLoader.cpp" />
+    <ClCompile Include="src\Project1\Components\RGBLightControl.cpp" />
     <ClCompile Include="src\GUI\GUIResolverFunction.cpp" />
     <ClCompile Include="src\Engine\Application\Modules\GUIModule.cpp" />
     <ClCompile Include="src\ForwardRenderer\ForwardSpotLight.cpp" />

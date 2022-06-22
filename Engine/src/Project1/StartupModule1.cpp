@@ -23,6 +23,8 @@
 #include <ForwardRenderer/ForwardSpotLight.h>
 #include <GUI/UISwitchButton.h>
 #include <GUI/GUIResolverFunction.h>
+#include <Project1/Components/RGBLightControl.h>
+#include <Engine/Graphics/Mesh/MeshLoader.h>
 
 #define CAMERA_MOVEMENT_SPEED 10.0f
 #define CAMERA_ANGULAR_SPEED 5.0f
@@ -46,6 +48,8 @@ namespace Engine
 		Array<MeshVertexElementDesc> meshVertexElements;
 		meshVertexElements.add(MeshVertexElementDesc("Position", MeshVertexElementType::Float3, false));
 		meshVertexElements.add(MeshVertexElementDesc("Normal", MeshVertexElementType::Float3, false));
+		meshVertexElements.add(MeshVertexElementDesc("Tangent", MeshVertexElementType::Float3, false));
+		meshVertexElements.add(MeshVertexElementDesc("BiTangent", MeshVertexElementType::Float3, false));
 		meshVertexElements.add(MeshVertexElementDesc("Uv", MeshVertexElementType::Float2, false));
 
 		MeshVertexLayout vertexLayout(meshVertexElements);
@@ -74,21 +78,43 @@ namespace Engine
 		uiRectMesh->update_vertex_data(uiVertexes.get_data());
 		uiRectMesh->update_index_data(uiIndexes.get_data());
 
+		MeshLoadResult monkeyLoadResult = {};
+		MeshLoader::load_mesh_from_path(PathUtils::get_relative_path("\\tableMesh.obj"), monkeyLoadResult);
+
+		Mesh* centeredObjectMesh = new Mesh(vertexLayout);
+
+		centeredObjectMesh->allocate_vertex_data(sizeof(MeshVertex) * monkeyLoadResult.Vertexes.get_cursor());
+		centeredObjectMesh->allocate_index_data(sizeof(unsigned int) * monkeyLoadResult.Indexes.get_cursor(),monkeyLoadResult.Indexes.get_cursor());
+
+		centeredObjectMesh->update_vertex_data(monkeyLoadResult.Vertexes.get_data());
+		centeredObjectMesh->update_index_data(monkeyLoadResult.Indexes.get_data());
+
 		Texture2D* floorTexture0 = new Texture2D(PathUtils::get_relative_path("\\floor0_color.jpg"));
+		Texture2D* floorNormalTexture0 = new Texture2D(PathUtils::get_relative_path("\\floor0_normal.jpg"));
 		Texture2D* wallTexture0 = new Texture2D(PathUtils::get_relative_path("\\wall0_color.jpg"));
+		Texture2D* wallNormalTexture0 = new Texture2D(PathUtils::get_relative_path("\\wall0_normal.jpg"));
 		Texture2D* roofTexture0 = new Texture2D(PathUtils::get_relative_path("\\roof0_color.jpg"));
+		Texture2D* centeredObjectColorTexture = new Texture2D(PathUtils::get_relative_path("\\table0_color.jpg"));
+		Texture2D* centeredObjectNormalexture = new Texture2D(PathUtils::get_relative_path("\\table0_normal.jpg"));
 
 		Material* floorMaterial = new Material(litTextureProgram);
 		floorMaterial->set_texture_parameter("f_Texture", floorTexture0);
+		floorMaterial->set_texture_parameter("f_NormalTexture", floorNormalTexture0);
 		floorMaterial->set_float_parameter("f_Tiling", 15.0f);
 
 		Material* wallMaterial = new Material(litTextureProgram);
 		wallMaterial->set_texture_parameter("f_Texture", wallTexture0);
-		wallMaterial->set_float_parameter("f_Tiling", 3.0f);
+		wallMaterial->set_texture_parameter("f_NormalTexture", wallNormalTexture0);
+		wallMaterial->set_float_parameter("f_Tiling", 1.0f);
 
 		Material* roofMaterial = new Material(litTextureProgram);
 		roofMaterial->set_texture_parameter("f_Texture", roofTexture0);
 		roofMaterial->set_float_parameter("f_Tiling", 3.0f);
+
+		Material* centeredObjectMaterial = new Material(litTextureProgram);
+		centeredObjectMaterial->set_texture_parameter("f_Texture", centeredObjectColorTexture);
+		centeredObjectMaterial->set_texture_parameter("f_NormalTexture", centeredObjectNormalexture);
+		centeredObjectMaterial->set_float_parameter("f_Tiling", 1.0f);
 
 		Material* uiMaterial = new Material(uiProgram);
 		uiMaterial->set_vec3_parameter("f_Color", {1.0f,0.0f,0.0f});
@@ -167,6 +193,19 @@ namespace Engine
 		ForwardRenderable* roofRenderable = roofEntity->create_component<ForwardRenderable>();
 		roofRenderable->set_material(roofMaterial);
 		roofRenderable->set_static_mesh(mesh);
+
+		/*
+		* Create centered mesh
+		*/
+		Entity* centeredObjectEntity = gameWorld->create_entity("Monkey entity");
+		SpatialComponent* centeredObjectSpatial = centeredObjectEntity->create_component<SpatialComponent>();
+		centeredObjectSpatial->set_scale({ 6, 6, 6 });
+		centeredObjectSpatial->set_position({ 0,0,0 });
+		centeredObjectSpatial->set_rotation({ 0,0,0 });
+
+		ForwardRenderable* centeredObjectRenderable = centeredObjectEntity->create_component<ForwardRenderable>();
+		centeredObjectRenderable->set_material(centeredObjectMaterial);
+		centeredObjectRenderable->set_static_mesh(centeredObjectMesh);
 
 		/*
 		* Create point lights
@@ -279,6 +318,12 @@ namespace Engine
 		uiRectButton3->set_color({ 0.2f,0.4f,0.6f });
 		uiRectButton3->set_material(uiMaterial);
 		uiRectButton3->set_mesh(uiRectMesh);
+
+		/*
+		* Create light control component
+		*/
+		Entity* rgbLightControlEntity = gameWorld->create_entity("Rgb light control entity");
+		RGBLightControl* rgbControl = rgbLightControlEntity->create_component<RGBLightControl>(pointLight0);
 
 		MESSAGE("StartupModule", "Startup module initialized");
 	}

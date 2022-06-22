@@ -8,10 +8,10 @@ namespace Engine
 	static Array<MeshVertex> get_plane_vertexes()
 	{
 		Array<MeshVertex> vertexes;
-		vertexes.add(MeshVertex({ 1,0,-1 }, {0,1.0f,0}, {0, 0}));
-		vertexes.add(MeshVertex({ -1,0,-1 },{0,1.0f,0}, { 1,0 }));
-		vertexes.add(MeshVertex({ -1,0,1 },{0,1.0f,0}, { 1,1 }));
-		vertexes.add(MeshVertex({ 1,0,1 },{0,1.0f,0}, { 0,1 }));
+		vertexes.add(MeshVertex({ 1,0,-1 }, {0,1.0f,0},{1,0,0},{0,0,1}, {0, 0}));
+		vertexes.add(MeshVertex({ -1,0,-1 },{0,1.0f,0}, { 1,0,0 }, { 0,0,1 }, { 1,0 }));
+		vertexes.add(MeshVertex({ -1,0,1 }, { 0,1.0f,0 }, { 1,0,0 }, { 0,0,1 }, { 1,1 }));
+		vertexes.add(MeshVertex({ 1,0,1 }, { 0,1.0f,0 }, { 1,0,0 }, { 0,0,1 }, { 0,1 }));
 		return vertexes;
 	}
 	static Array<unsigned int> get_plane_indexes()

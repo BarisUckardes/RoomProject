@@ -61,12 +61,14 @@ Engine::String g_LitTextureVertexShader = R"glsl(
 #version 450 core
 layout(location = 0) in vec3 aPosition;
 layout(location = 1) in vec3 aNormal;
-layout(location = 2) in vec2 aUv;
+layout(location = 2) in vec3 aTangent;
+layout(location = 3) in vec3 aBiTangent;
+layout(location = 4) in vec2 aUv;
 
 out vec2 f_Uv;
 out vec3 f_Normal;
 out vec3 f_WorldPos;
-
+out mat3 f_TBN;
 uniform mat4 v_Mvp;
 uniform mat4 v_Model;
 
@@ -76,6 +78,11 @@ void main()
 	f_Uv = aUv;
 	f_WorldPos = (v_Model*vec4(aPosition,1.0f)).xyz;
 	f_Normal = mat3(transpose(inverse(v_Model)))*aNormal;
+	vec3 T = normalize(vec3(v_Model * vec4(aTangent,   0.0)));
+	vec3 B = normalize(vec3(v_Model * vec4(aBiTangent, 0.0)));
+	vec3 N = normalize(vec3(v_Model * vec4(aNormal,    0.0)));
+	mat3 TBN = mat3(T, B, N);
+	f_TBN = TBN;
 }
 )glsl";
 
@@ -87,6 +94,7 @@ out vec4 f_ColorOut;
 in vec2 f_Uv;
 in vec3 f_Normal;
 in vec3 f_WorldPos;
+in mat3 f_TBN;
 
 #define MEAN_AMBIENT 0.2f
 #define MAX_LIGHT 6
@@ -94,6 +102,7 @@ in vec3 f_WorldPos;
 uniform vec3 f_ViewPos;
 
 uniform sampler2D f_Texture;
+uniform sampler2D f_NormalTexture;
 
 uniform float f_Tiling;
 
@@ -112,6 +121,11 @@ uniform vec3 f_SpotLightDirections[MAX_LIGHT];
 void main()
 {
 	vec4 ambient = vec4(0,0,0,0);
+	vec3 fNormal;
+	fNormal = texture(f_NormalTexture, f_Uv).rgb;
+	fNormal = fNormal * 2.0 - 1.0;   
+	fNormal = normalize(f_TBN * fNormal); 
+
 	for(int i = 0;i<f_PointLightCount;i++)
 	{
 		vec3 pos = f_PointLightPositions[i];
@@ -124,7 +138,7 @@ void main()
 
 		float power = max(0.0f,pow(range/distance(pos,f_WorldPos),2));
 
-		float spec = pow(max(dot(f_Normal,halfwayDir),0.0f),0.35f);
+		float spec = pow(max(dot(fNormal,halfwayDir),0.0f),0.35f);
 		
 		ambient += vec4(color,1.0f)*spec*power;
 	}
@@ -145,7 +159,7 @@ void main()
 		cutoff = cutoff > radians(angle) ? 1.0f : 0.0f;
 
 		float power = max(0.0f,pow(range/distance(pos,f_WorldPos),2));
-		float spec = pow(max(dot(f_Normal,halfwayDir),0.0f),0.35f);
+		float spec = pow(max(dot(fNormal,halfwayDir),0.0f),0.35f);
 
 		ambient += vec4(color,1.0f)*spec*power*cutoff;
 	}

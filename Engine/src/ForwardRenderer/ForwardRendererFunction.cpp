@@ -55,7 +55,9 @@ namespace Engine
     void ForwardRendererFunction::execute()
     {
         glEnable(GL_DEPTH_TEST);
-
+        glFrontFace(GL_CCW);
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
         /*
         * Set and clear the swapchain framebuffer upfront
         */

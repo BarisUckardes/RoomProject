@@ -40,7 +40,7 @@ namespace Engine
 
         glm::vec3 pos = spatial->get_position();
         pos.y = PLAYER_HEIGHT;
-        spatial->set_position(pos);
+       // spatial->set_position(pos);
 
         /*
         * Validate if user wants to rotate
